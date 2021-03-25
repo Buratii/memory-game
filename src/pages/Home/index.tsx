@@ -1,17 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import { Text } from 'react-native';
+import LogoImg from '../../assets/logo.png';
 
-import LogoImg from '../../assets/Logo.png';
-
-import { Container, Logo, Title, Nickname } from './styles';
+import {
+  Container,
+  Logo,
+  InputWrapper,
+  Title,
+  Nickname,
+  ButtonsWrapper,
+  Button,
+  ButtonText
+} from './styles';
 
 function Home() {
+  const { navigate } = useNavigation();
+
+  const [nickname, setNickname] = useState('');
+
   return (
-    <Container>
+    <Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <Logo source={LogoImg} />
-      <Title>Insira um apelido</Title>
-      <Nickname />
+
+      <InputWrapper>
+        <Title>Insira um apelido</Title>
+        <Nickname
+          placeholder="Ex: João"
+          onChangeText={setNickname}
+        />
+      </InputWrapper>
+
+      <ButtonsWrapper>
+        <Button
+          onPress={() => navigate('Game', { nickname: nickname })}
+          disabled={nickname === ''}
+        >
+          <ButtonText>Jogar</ButtonText>
+        </Button>
+        <Button onPress={() => navigate('Leaderboard')}>
+          <ButtonText>Placar</ButtonText>
+        </Button>
+      </ButtonsWrapper>
     </Container>
   );
 };
