@@ -16,7 +16,7 @@
   Esse é um jogo da memória desenvolvido em React Native, inspirado na série de filmes Star Wars! 
 </p>
 
-<h2 align="center">
+<h2>
   Para testar
 </h2>
 
